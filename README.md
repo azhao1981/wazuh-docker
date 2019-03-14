@@ -16,9 +16,28 @@ In addition, a docker-compose file is provided to launch the containers mentione
 
 ## Documentation
 
+* getting start
 * [Wazuh full documentation](http://documentation.wazuh.com)
 * [Wazuh documentation for Docker](https://documentation.wazuh.com/current/docker/index.html)
 * [Docker hub](https://hub.docker.com/u/wazuh)
+
+## getting start
+
+```bash
+mkdir -p ./v/wazuh/ossec/data
+mkdir -p ./v/wazuh/postfix
+mkdir -p ./v/wazuh/filebeat
+mkdir -p ./v/wazuh/config
+
+mkdir -p ./v/logstash/data
+mkdir -p ./v/elasticsearch/data
+mkdir -p ./v/nginx/config/conf.d
+
+$ grep vm.max_map_count /etc/sysctl.conf
+vm.max_map_count=262144
+sysctl -w vm.max_map_count=262144
+ERROR: [1] bootstrap checks failed
+elasticsearch_1  | [1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 
 ## Directory structure
 
