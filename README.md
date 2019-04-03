@@ -24,6 +24,7 @@ In addition, a docker-compose file is provided to launch the containers mentione
 ## getting start
 
 ```bash
+# 注意: 目录需要在普通用户下创建
 mkdir -p ./v/wazuh/ossec/data
 mkdir -p ./v/wazuh/postfix
 mkdir -p ./v/wazuh/filebeat
@@ -32,6 +33,7 @@ mkdir -p ./v/wazuh/config
 mkdir -p ./v/logstash/data
 mkdir -p ./v/elasticsearch/data
 mkdir -p ./v/nginx/config/conf.d
+mkdir -p ./v/tools
 
 $ grep vm.max_map_count /etc/sysctl.conf
 vm.max_map_count=262144

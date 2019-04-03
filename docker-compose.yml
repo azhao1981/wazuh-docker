@@ -2,10 +2,21 @@
 version: '2'
 
 services:
+  base:
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./v/tools:/srv/tools
+    logging:
+      options:
+        max-size: "2048m"
+        max-file: "20"
   wazuh:
     image: wazuh/wazuh:3.8.0_6.5.4
     hostname: wazuh-manager
     restart: always
+    extends: base
     ports:
       - "1514:1514/udp"
       - "1515:1515"
@@ -26,6 +37,7 @@ services:
     image: wazuh/wazuh-logstash:3.8.0_6.5.4
     hostname: logstash
     restart: always
+    extends: base
     volumes:
       - ./v/logstash/data:/etc/logstash/conf.d:Z
     links:
@@ -42,6 +54,7 @@ services:
     image: elasticsearch:6.5.4
     hostname: elasticsearch
     restart: always
+    extends: base
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -63,6 +76,7 @@ services:
     image: wazuh/wazuh-kibana:3.8.0_6.5.4
     hostname: kibana
     restart: always
+    extends: base
     ports:
       - "5601:5601"
     environment:
@@ -78,6 +92,7 @@ services:
   #   image: wazuh/wazuh-nginx:3.8.0_6.5.4
   #   hostname: nginx
   #   restart: always
+  #   extends: base
   #   environment:
   #     - NGINX_PORT=443
   #   ports:
